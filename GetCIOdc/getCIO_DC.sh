@@ -1,11 +1,18 @@
 #!/bin/bash
+
+#username
+us="$1"
+#password
+pw="$2"
+
+if [ $# -ne 2 ]; then
+	echo "Usage : $0 <user> <password>"
+	exit 1
+fi
+
 dir="./CIO_DC"
 dirOld="./CIO_DC_OLD"
-url=''
-#username
-us=""
-#password
-pw=""
+url='https://d1.fr.phast-net.com/TelCIO-WebApi/api/Distribution/GetDirectLatestCiodc?returnZip=true'
 #date
 NOW=$( date '+%F_%H-%M-%S' )
 #logdir
@@ -18,6 +25,7 @@ if [ ! -d "$logd" ]; then
 	echo "making $logd"
 	mkdir "$logd"
 fi
+
 
 if (( $SHLVL < 3 )) 
 then 
@@ -47,6 +55,4 @@ unzip ./Latest.zip
 touch DATE.txt
 line=$(head -n 1 DISTRIB.txt)
 timestamp=$(echo "$line" | cut -d '|' -f 6)
-echo $line
-echo $timestamp
 echo "$timestamp|$NOW" > DATE.txt
