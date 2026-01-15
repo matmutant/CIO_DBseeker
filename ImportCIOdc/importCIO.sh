@@ -4,9 +4,28 @@
 
 
 db="CIO.db" #Name of the output database for the script
-pathNameRAW="./CIO_SP" #relative or absolute path of the source files as extracted from latest CIO_SP distribution
-pathName="./CIO_SP_UTF8" #relative or absolute path of the source files encoded to UTF-8
+pathNameRAW="./CIO_DC" #relative or absolute path of the source files as extracted from latest CIO_SP distribution
+pathName="./CIO_DC_UTF8" #relative or absolute path of the source files encoded to UTF-8
 dbTables="dbTablesCols.txt"
+#date
+NOW=$( date '+%F_%H-%M-%S' )
+#logdir
+logd="./logs"
+#logfile
+logf="${logd}/log_CIOdc_Import_${NOW}.txt"
+
+if [ ! -d "$logd" ]; then
+	echo "making $logd"
+	mkdir "$logd"
+fi
+
+if (( $SHLVL < 3 )) 
+then 
+	    /usr/bin/script -c "/bin/bash -c '$0 $*'" $logf
+	        exit 0
+fi
+
+
 
 #Array that contains the TABLENAME (same as the CIO filename) and the colNames
 #Syntax: "TABLENAME|colname1 [sql types and attributes (integer, text, .... primary key], colname2 [...], colname3 [...]"
