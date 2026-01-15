@@ -14,5 +14,5 @@ input : user and password
 URL target is hardcoded in script for now.
 
 ### Shell
-input : none  
-URL, user and password are hardcoded in script for now
+input : user and password  
+URL target is hardcoded in script for now.
